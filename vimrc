@@ -1,3 +1,6 @@
+"===========================================================
+" Plugins
+"===========================================================
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -10,6 +13,11 @@ Bundle 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
 "CtrlP plugin
 Plugin 'kien/ctrlp.vim'
+"Vim clojure stuff
+Bundle 'tpope/vim-fireplace'
+Bundle 'guns/vim-clojure-static'
+Bundle 'kien/rainbow_parentheses.vim'
+
 Plugin 'Chiel92/vim-autoformat'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'claco/jasmine.vim'
@@ -33,18 +41,22 @@ filetype plugin indent on    " required
 syntax enable
 set background=dark
 colorscheme solarized
-
+"===========================================================
+" Clojure and lisp specifics
+"===========================================================
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 "===========================================================
 " Install powerline
 "===========================================================
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
-
 "===========================================================
 "Powerline settings 
 "===========================================================
-
 set guifont=InputMono:h12
 let g:Powerline_symbols = 'fancy'
 set encoding=utf-8
@@ -69,7 +81,7 @@ set laststatus=2
 set showmatch
 set incsearch
 set hlsearch
-"make searches case-sensitive only if thy contain uppercase characters
+"make searches case-sensitive only if they contain uppercase characters
 set ignorecase smartcase
 " highlight current line
 set cursorline
@@ -81,6 +93,10 @@ set backspace=indent,eol,start
 set autoread
 " Add line number to buffers
 set number
+"Use undo file
+set undofile
+" set a directory to store the undo history
+set undodir=/~/.vimundo/
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM config autoreload
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -93,3 +109,6 @@ augroup END " }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = "\<Space>"
 nnoremap <Leader>o :CtrlP<CR>
+
+nmap <c-s> :w<cr>
+imap <c-s> <esc>:w<cr>a

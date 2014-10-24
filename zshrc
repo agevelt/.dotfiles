@@ -27,3 +27,7 @@ bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
+
+# aliases
+alias vim="stty stop '' -ixoff; vim"
+
